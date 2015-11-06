@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:inputHidden value="#{itemService.page.pageIndex}" ></h:inputHidden>
+            <h:commandButton value="new" action="edit" ></h:commandButton>
+            <h:dataTable value="#{itemService.list}" var="item">
+                <h:column>
+                    <h:outputLabel value="#{item.id}" ></h:outputLabel>
+                </h:column>
+                <h:column>
+                    <h:outputLabel value="#{item.content}" ></h:outputLabel>
+                </h:column>
+                <h:column>
+                    <h:outputLabel value="#{item.createDate}" ></h:outputLabel>
+                </h:column>
+                <h:column>
+                    <h:commandButton value="edit" action="#{itemService.edit(item)}" ></h:commandButton>
+                    <h:commandButton value="delete" action="#{itemService.delete(item.id)}" ></h:commandButton>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton action="#{itemService.prevPage()}" value="prev page" >
+                <f:ajax execute="@all" render="@form"></f:ajax>
+            </h:commandButton>            
+            <h:outputText value="#{itemService.page.pageIndex}"></h:outputText> / <h:outputText value="#{itemService.totalPage}"></h:outputText>
+            <h:commandButton action="#{itemService.nextPage()}" value="next page" >
+                <f:ajax execute="@all" render="@form"></f:ajax>
+            </h:commandButton>
+        </h:form>
+    </h:body>
+</html>
+
